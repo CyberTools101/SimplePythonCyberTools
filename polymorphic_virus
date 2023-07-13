@@ -13,10 +13,10 @@ from base64 import b64encode
 
 
 print(Path.cwd())
-print(os.urandom(50))
+
 print(os.path.basename(__file__))
 
-f = open("newpython.py", "a")
+f = open("newpython{randomness}.py".format(randomness = b64encode(os.urandom(100)).decode('utf-8')), "a")
 f.write(
 
     '''
