@@ -10,16 +10,37 @@ import sys
 from threading import Thread
 from pathlib import Path
 from base64 import b64encode
-
+import random
+import string
 
 print(Path.cwd())
 
 print(os.path.basename(__file__))
 
-f = open("newpython{randomness}.py".format(randomness = b64encode(os.urandom(100)).decode('utf-8')), "a")
+filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
+
+f = open(filename, "w")
 f.write(
 
     '''
+import os
+import sys
+from threading import Thread
+from pathlib import Path
+from base64 import b64encode
+import random
+import string
+
+print(Path.cwd())
+
+print(os.path.basename(__file__))
+
+filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
+
+f = open(filename, "w")
+f.write(
+
+    \'\'\'
 import os
 import sys
 from threading import Thread
@@ -60,17 +81,10 @@ f.close()
 
 
 def runFunc():
-    os.system('python3 newpython.py')
+    os.system('python3 ' + filename)
 
 thread = Thread(target=runFunc)
 thread.start()
-print("yep I am here")
+print("yep I am here" + filename)
 sys.exit()
 
-
-
-#f = open("demofile2.txt", "a")
-#f.write('''
-#from pathlib import Path\nprint(Path.cwd()) {randomness}
-#'''.format(randomness = str(os.urandom(100))))
-#f.close()
