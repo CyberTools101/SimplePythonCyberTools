@@ -13,7 +13,7 @@ from base64 import b64encode
 
 
 print(Path.cwd())
-print(os.urandom(100))
+print(os.urandom(50))
 print(os.path.basename(__file__))
 
 f = open("newpython.py", "a")
@@ -31,7 +31,7 @@ print(Path.cwd())
 print(os.urandom(100))
 print(os.path.basename(__file__))
 
-f = open("newpython.py{randomness}", "a")
+f = open("newpython{randomness}.py", "a")
 f.write(\'\'\'
 import os
 import sys
