@@ -24,7 +24,7 @@ f.write(
 
     '''
     
-    import os
+import os
 import sys
 from threading import Thread
 from pathlib import Path
@@ -44,7 +44,7 @@ f.write(
     '''
 
 '{randomness}'
-'''.format(randomness = b64encode(os.urandom(100)).decode('utf-8'))
+'''.format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
         )
 
 
@@ -60,7 +60,7 @@ print("yep I am here" + filename)
 sys.exit()
 
 '{randomness}'
-'''.format(randomness = b64encode(os.urandom(100)).decode('utf-8'))
+'''.format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
         )
 
 
