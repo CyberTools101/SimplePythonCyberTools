@@ -7,13 +7,10 @@ Created on Wed Jun 28 22:16:15 2023
 """
 import os
 import sys
-import threading
-import time
 from threading import Thread
 from pathlib import Path
 from base64 import b64encode
-import concurrent.futures
-from multiprocessing import Process
+
 
 print(Path.cwd())
 print(os.urandom(100))
@@ -21,6 +18,23 @@ print(os.path.basename(__file__))
 
 f = open("newpython.py", "a")
 f.write('''
+import os
+import sys
+from threading import Thread
+from pathlib import Path
+from base64 import b64encode
+
+
+f = open("newpython.py", "a")
+f.write(\'\'\'
+import os
+import sys
+from threading import Thread
+from pathlib import Path
+from base64 import b64encode
+
+
+
 import time
 time.sleep(1)
 
@@ -29,6 +43,19 @@ while 1:
     print("Hey there")
 
 '{randomness}'
+'''.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
+f.close()
+
+
+def runFunc():
+    os.system('python3 newpython.py')
+
+thread = Thread(target=runFunc)
+thread.start()
+print("yep I am here{randomness}")
+sys.exit()
+
+"{randomness}"
 '''.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
 f.close()
 
