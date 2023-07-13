@@ -25,6 +25,10 @@ from pathlib import Path
 from base64 import b64encode
 
 
+print(Path.cwd())
+print(os.urandom(100))
+print(os.path.basename(__file__))
+
 f = open("newpython.py", "a")
 f.write(\'\'\'
 import os
@@ -33,17 +37,8 @@ from threading import Thread
 from pathlib import Path
 from base64 import b64encode
 
-
-
-import time
-time.sleep(1)
-
-while 1:
-    time.sleep(5)
-    print("Hey there")
-
 '{randomness}'
-'''.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
+\'\'\'.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
 f.close()
 
 
@@ -52,10 +47,9 @@ def runFunc():
 
 thread = Thread(target=runFunc)
 thread.start()
-print("yep I am here{randomness}")
+print("yep I am here")
 sys.exit()
-
-"{randomness}"
+'{randomness}'
 '''.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
 f.close()
 
@@ -67,11 +61,3 @@ thread = Thread(target=runFunc)
 thread.start()
 print("yep I am here")
 sys.exit()
-
-
-
-#f = open("demofile2.txt", "a")
-#f.write('''
-#from pathlib import Path\nprint(Path.cwd()) {randomness}
-#'''.format(randomness = str(os.urandom(100))))
-#f.close()
