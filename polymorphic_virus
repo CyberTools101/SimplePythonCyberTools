@@ -59,8 +59,8 @@ thread.start()
 print("yep I am here" + filename)
 sys.exit()
 
-'{randomness}'
-'''.format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
+'{chaos}'
+'''.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
         )
 
 
