@@ -23,7 +23,8 @@ f = open(filename, "w")
 f.write(
 
     '''
-import os
+    
+    import os
 import sys
 from threading import Thread
 from pathlib import Path
@@ -40,38 +41,8 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 f = open(filename, "w")
 f.write(
 
-    \'\'\'
-import os
-import sys
-from threading import Thread
-from pathlib import Path
-from base64 import b64encode
+    '''
 
-
-print(Path.cwd())
-print(os.urandom(100))
-print(os.path.basename(__file__))
-
-f = open("newpython{randomness}.py", "a")
-f.write(\'\'\'
-import os
-import sys
-from threading import Thread
-from pathlib import Path
-from base64 import b64encode
-
-'{randomness}'
-\'\'\'.format(randomness = b64encode(os.urandom(100)).decode('utf-8')))
-f.close()
-
-
-def runFunc():
-    os.system('python3 newpython.py')
-
-thread = Thread(target=runFunc)
-thread.start()
-print("yep I am here")
-sys.exit()
 '{randomness}'
 '''.format(randomness = b64encode(os.urandom(100)).decode('utf-8'))
         )
@@ -87,4 +58,21 @@ thread = Thread(target=runFunc)
 thread.start()
 print("yep I am here" + filename)
 sys.exit()
+
+'{randomness}'
+'''.format(randomness = b64encode(os.urandom(100)).decode('utf-8'))
+        )
+
+
+f.close()
+
+
+def runFunc():
+    os.system('python3 ' + filename)
+
+thread = Thread(target=runFunc)
+thread.start()
+print("yep I am here" + filename)
+sys.exit()
+
 
