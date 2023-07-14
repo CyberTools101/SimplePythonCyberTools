@@ -32,8 +32,6 @@ directory = os.getcwd()
 thisfile = os.path.basename(__file__)
 
 
-
-
 # get the current file content
 f = open(thisfile, "r")
 lines = f.readlines()
@@ -57,3 +55,9 @@ def runFuncv():
 # run the new file 
 thread = Thread(target=runFuncv)
 thread.start()
+
+
+
+
+
+#this is the end
