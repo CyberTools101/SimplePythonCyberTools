@@ -27,7 +27,6 @@ def writeIntoFile(file, lines):
         file.write(line)
 
 def runFuncv(filename):
-    print(filename + "ultimate file name")
     os.system('python3 ' + filename)
 
 # get the current file
@@ -36,11 +35,8 @@ def create_file(dir):
     abspath = os.path.abspath(__file__)
     thisfile = os.path.basename(__file__)
     directory = os.getcwd()
-    
-    print("what is this: " + thisfile)
-    print("path is this: " + abspath)
 
-    f = open(abspath, "r")
+    f = open(thisfile, "r")
     lines = f.readlines()
     f.close()
 
