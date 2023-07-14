@@ -77,8 +77,7 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 
     
     
-
-#for x in os.walk(directory):
+for x in os.walk(directory):
     g = open(x[0] + "/" + filename, "w")
     print(x[0] + "/" + "printing here")
     writeIntoFile(g, lines)
