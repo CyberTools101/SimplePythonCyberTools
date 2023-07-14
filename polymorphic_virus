@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 28 22:16:15 2023
 
-@author: CyberTools101
-"""
 import os
 import sys
 from threading import Thread
@@ -16,40 +10,19 @@ import string
 print(Path.cwd())
 
 print(os.path.basename(__file__))
+thisfile = os.path.basename(__file__)
+f = open(thisfile, "r")
+lines = f.readlines()
 
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
 
-f = open(filename, "w")
-f.write(
+g = open(filename, "w")
+for line in lines:
+    g.write(line)
 
-    '''
-    
-import os
-import sys
-from threading import Thread
-from pathlib import Path
-from base64 import b64encode
-import random
-import string
-
-print(Path.cwd())
-
-print(os.path.basename(__file__))
-
-filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
-
-f = open(filename, "w")
-f.write(
-
-    '''
-
-'{chaos}'
-'''.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
-        )
-
-
+g.write('\n'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=100))))
+g.close()
 f.close()
-
 
 def runFunc():
     os.system('python3 ' + filename)
@@ -58,21 +31,3 @@ thread = Thread(target=runFunc)
 thread.start()
 print("yep I am here" + filename)
 sys.exit()
-
-'{chaos}'
-'''.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
-        )
-
-
-f.close()
-
-
-def runFunc():
-    os.system('python3 ' + filename)
-
-thread = Thread(target=runFunc)
-thread.start()
-print("yep I am here" + filename)
-sys.exit()
-
-
