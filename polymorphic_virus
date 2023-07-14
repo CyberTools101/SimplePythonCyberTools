@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun 28 22:16:15 2023
-
+Purpose: This is just a generic example of a polymorphic virus. When ran, it creates a copy of itself
+         along wtih a random string to generate a new hash making it harder to be discovered. This virus 
+         main purpose is to consume system resources and slow down the computer
 @author: CyberTools101
 """
 
