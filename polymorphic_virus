@@ -27,6 +27,7 @@ def writeIntoFile(file, lines):
         file.write(line)
 
 def runFuncv(filename):
+    print(filename + "ultimate file name")
     os.system('python3 ' + filename)
 
 # get the current file
@@ -39,7 +40,7 @@ def create_file(dir):
     print("what is this: " + thisfile)
     print("path is this: " + abspath)
 
-    f = open(thisfile, "r")
+    f = open(abspath, "r")
     lines = f.readlines()
     f.close()
 
@@ -66,7 +67,9 @@ for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
     # Create the new file and include a different name
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file(x[0])])
+    filename = create_file(x[0])
+    
+    thread = Thread(target=runFuncv, args=[x[0] + "\\" + filename])
     thread.start()
 
 
