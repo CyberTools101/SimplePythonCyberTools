@@ -30,8 +30,13 @@ def runFuncv(filename):
     os.system('python3 ' + filename)
 
 # get the current file
-thisfile = os.path.basename(__file__)
+
+
+
+thisfile = os.path.abspath(__file__)
 directory = os.getcwd()
+
+
 
 # open up the file and read it
 f = open(thisfile, "r")
@@ -58,8 +63,9 @@ for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
     # Create the new file and include a different name
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file(x[0])])
-    thread.start()
+    create_file(x[0])
+    #thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file(x[0])])
+    #thread.start()
 
 
 
